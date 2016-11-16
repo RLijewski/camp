@@ -1,0 +1,22 @@
+// Descriptive color variables
+$light-teal         : #4db6ac;
+$light-blue-grey    : #eceff1;
+$white              : #ffffff;
+$light-green-color  : #dcedc8;
+$dark-green-color   : #8bc34a;
+$dark-blue-grey     : #cfd8dc;
+$light-grey         : #bdbdbd;
+
+// Layout variables
+$not-searching-height : 70px;
+$searching-height     : calc(100vh - #{$not-searching-height} + 3px);
+$bottom-margin-ns     : $not-searching-height - 20px;
+$bottom-margin-s      : calc(#{$searching-height} - 50px);
+
+// Font stacks
+$stack-sans-serif   : Helvetica, Arial, sans-serif;
+$varela-round        : 'Varela Round', $stack-sans-serif;
+
+// Media Query Break Points
+$breakpoint-medium  : 601px;
+$breakpoint-large   : 993px;

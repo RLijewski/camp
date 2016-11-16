@@ -1,0 +1,18 @@
+header {
+  z-index: 1000;
+}
+
+nav {
+  background-color: $light-teal;
+}
+
+#nav-logo {
+  margin-top: 12px;
+  height: 32px;
+  width: 32px;
+
+  @include mediaQueryBreakpoint("medium") {
+    height: 40px;
+    width: 40px;
+  }
+}

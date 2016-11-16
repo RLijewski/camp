@@ -1,0 +1,89 @@
+/*
+ * Keyframes
+ */
+@keyframes fadeIn {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0); }
+  100% {
+    opacity: 1;
+    transform: none; } }
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translate3d(-100%, 0, 0); }
+  100% {
+    opacity: 1;
+    transform: none; } }
+/*
+ * CSS Page Transitions
+ * Don't forget to add vendor prefixes!
+ */
+.m-scene {
+  z-index: -1;
+  /** Basic styles for an animated element */
+  /** An element that fades in */
+  /** An element that fades in and slides up */
+  /** An element that fades in and slides from the right */ }
+  .m-scene .scene_element {
+    animation-duration: 0.25s;
+    transition-timing-function: ease-in;
+    animation-fill-mode: both; }
+  .m-scene .scene_element--fadein {
+    animation-name: fadeIn; }
+  .m-scene .scene_element--fadeinup {
+    animation-name: fadeInUp; }
+  .m-scene .scene_element--fadeinright {
+    animation-name: fadeInRight; }
+  .m-scene.is-exiting .scene_element {
+    animation-direction: alternate-reverse; }
+
+* {
+  box-sizing: border-box; }
+
+body {
+  background-color: #eceff1; }
+
+header {
+  z-index: 1000; }
+
+nav {
+  background-color: #4db6ac; }
+
+#nav-logo {
+  margin-top: 12px;
+  height: 32px;
+  width: 32px; }
+  @media screen and (min-width: 601px) {
+    #nav-logo {
+      height: 40px;
+      width: 40px; } }
+
+#add {
+  background-color: #8bc34a; }
+
+.input-field input[type=text]:focus + label {
+  color: #4db6ac; }
+
+.input-field input[type=text]:focus {
+  border-bottom: 1px solid #4db6ac;
+  box-shadow: 0 1px 0 0 #4db6ac; }
+
+#add-form {
+  width: 100%;
+  margin: auto; }
+  @media screen and (min-width: 993px) {
+    #add-form {
+      width: 80%; } }
+
+footer {
+  text-align: center; }
+  footer.page-footer {
+    background-color: #cfd8dc; }
+
+/*# sourceMappingURL=application.css.map */

@@ -1,0 +1,18 @@
+.input-field input[type=text]:focus + label {
+  color: $light-teal;
+}
+
+.input-field input[type=text]:focus {
+  border-bottom: 1px solid $light-teal;
+  box-shadow: 0 1px 0 0 $light-teal;
+}
+
+#add-form {
+  width: 100%;
+  margin: auto;
+
+  @include mediaQueryBreakpoint("large") {
+    width: 80%;
+  }
+}
+
