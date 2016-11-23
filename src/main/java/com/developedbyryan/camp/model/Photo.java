@@ -6,28 +6,34 @@ import javax.persistence.*;
 public class Photo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
+    @Column
     @Lob
-    private byte[] bytes;
+    private byte[] image;
 
     @ManyToOne
     private StatePark statePark;
 
-    public long getId() {
+    @Column
+    private boolean mainPhoto;
+
+    public Photo() {}
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public byte[] getBytes() {
-        return bytes;
+    public byte[] getImage() {
+        return image;
     }
 
-    public void setBytes(byte[] bytes) {
-        this.bytes = bytes;
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     public StatePark getStatePark() {
@@ -36,5 +42,13 @@ public class Photo {
 
     public void setStatePark(StatePark statePark) {
         this.statePark = statePark;
+    }
+
+    public boolean isMainPhoto() {
+        return mainPhoto;
+    }
+
+    public void setMainPhoto(boolean mainPhoto) {
+        this.mainPhoto = mainPhoto;
     }
 }

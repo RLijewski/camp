@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="layout :: head('Photo Management')"></head>
+
+  <body>
+    <div th:replace="layout :: header"></div>
+
+    <div th:replace="layout :: flash"></div>
+
+    <main class="container">
+      <div th:replace="layout :: addButton('add-photo')"></div>
+    </main>
+
+    <footer th:replace="layout :: footer"></footer>
+
+    <div th:replace="layout :: scripts"></div>
+  </body>
+</html>

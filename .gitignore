@@ -1,2 +1,6 @@
 
 *.scssc
+.idea/
+build/
+out/
+h2-server-bootup

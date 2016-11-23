@@ -1,7 +1,11 @@
-* {
+html {
+  height: 100%;
   box-sizing: border-box;
 }
 
 body {
+  position: relative;
   background-color: $light-blue-grey;
+  min-height: 100%;
+  padding-bottom: 6rem;
 }

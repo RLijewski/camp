@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+  <head th:fragment="head(page_title)">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link rel='shortcut icon' th:href="@{icons/favicon.ico}" type='image/x-icon'/>
+
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css"/>
+    <link rel="stylesheet" th:href="@{css/application.css}"/>
+
+    <title th:text="'Camp | ' + ${page_title}">Camp</title>
+  </head>
+
+  <body>
+
+  <header th:fragment="header">
+    <div class="navbar-fixed">
+      <ul id="management" class="dropdown-content">
+        <li><a th:href="@{/user-management}">User Management</a></li>
+        <li><a th:href="@{/category-management}">Category Management</a></li>
+        <li><a th:href="@{/photo-management}">Photo Management</a></li>
+      </ul>
+      <ul id="user-account" class="dropdown-content">
+        <li><a th:href="@{/user-account}">Account</a></li>
+        <li>
+          <form id="logoutForm" th:action="@{/logout}" method="post">
+            <a id="logoutButton">Log Out</a>
+          </form>
+        </li>
+      </ul>
+      <nav>
+        <div class="nav-wrapper container">
+          <a th:href="@{/}" class="brand-logo">
+            <svg id="nav-logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 429.6 429.6" style="enable-background:new 0 0 429.6 429.6;" xml:space="preserve">
+                  <path id="XMLID_625_" d="M419.6,358.401h-20.249L226.822,99.597l21.899-32.85c3.063-4.595,1.822-10.804-2.773-13.867
+                  s-10.805-1.824-13.867,2.773l-17.28,25.92l-17.28-25.92c-3.063-4.596-9.273-5.837-13.867-2.773
+                  c-4.596,3.063-5.837,9.272-2.773,13.867l21.903,32.855L30.248,358.401H10c-5.522,0-10,4.477-10,10s4.478,10,10,10h409.6
+                  c5.522,0,10-4.477,10-10S425.122,358.401,419.6,358.401z M156.688,358.401l58.114-87.173l58.112,87.173H156.688z M296.95,358.401
+                  l-73.828-110.748c-1.854-2.782-4.977-4.453-8.32-4.453s-6.466,1.671-8.32,4.453L132.65,358.401H54.285l160.52-240.774
+                  l160.51,240.774H296.95z" fill="#FFFFFF"/>
+                  </svg>
+          </a>
+          <ul class="right hide-on-med-and-down">
+            <li>
+              <a sec:authentication="name" class="dropdown-button" href="#!" data-activates="user-account">
+                Components
+                <i class="material-icons right">arrow_drop_down</i>
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-button" href="#!" data-activates="management">
+                Management
+                <i class="material-icons right">arrow_drop_down</i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <div th:fragment="addButton(url)" class="fixed-action-btn section">
+    <a id="add" th:href="@{'/' + ${url}}" class="btn-floating btn-large">
+      <i class="large material-icons">add</i>
+    </a>
+  </div>
+
+  <div th:fragment="flash" th:if="${flash != null}" class="container">
+    <i class="right material-icons">close</i>
+    <div th:classappend="${#strings.toLowerCase(flash.status)}" th:text="${flash.message}" class="flash"></div>
+  </div>
+
+  <footer th:fragment="footer" class="page-footer">
+    <div class="footer-copyright">
+      <div id="copyright" class="container">
+        © Developed by Ryan
+      </div>
+    </div>
+  </footer>
+
+  <div th:fragment="scripts">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+    <script type="text/javascript" th:src="@{js/application.js}"></script>
+  </div>
+
+  </body>
+</html>

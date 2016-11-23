@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="layout :: head('Add-Category')"></head>
+
+  <body>
+    <header th:replace="layout :: header"></header>
+
+    <div th:replace="layout :: flash"></div>
+
+    <main class="container section">
+      <div class="row">
+        <div class="col s12">
+          <div class="card-panel">
+            <form th:action="@{/add-category}" method="post" th:object="${category}" id="add-form">
+              <div>
+                <h4>Add A New Category</h4>
+                <div class="input-field">
+                  <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="active"></div>
+                  <input id="category-name" type="text" th:field="*{name}"/>
+                  <label for="category-name">Name</label>
+                </div>
+
+                <div class="card-action right-align">
+                  <a th:href="@{/category-management}" class="waves-effect waves-light btn grey">Cancel</a>
+
+                  <button class="btn waves-effect waves-light button" type="submit">Submit
+                    <i class="material-icons right">send</i>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer th:replace="layout :: footer"></footer>
+
+    <div th:replace="layout :: scripts"></div>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+.app-error {
+  margin: 20px 0 30px;
+  border: 1px solid #dad7de;
+  padding: 10px;
+  background-color: #f7f5fa;
+  border-radius: 6px;
+  font-size: .69em;
+
+  @include mediaQueryBreakpoint("medium") {
+    font-size: 1em;
+  }
+}

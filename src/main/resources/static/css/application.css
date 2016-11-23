@@ -1,56 +1,12 @@
-/*
- * Keyframes
- */
-@keyframes fadeIn {
-  0% {
-    opacity: 0; }
-  100% {
-    opacity: 1; } }
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translate3d(0, 100%, 0); }
-  100% {
-    opacity: 1;
-    transform: none; } }
-@keyframes fadeInRight {
-  0% {
-    opacity: 0;
-    transform: translate3d(-100%, 0, 0); }
-  100% {
-    opacity: 1;
-    transform: none; } }
-/*
- * CSS Page Transitions
- * Don't forget to add vendor prefixes!
- */
-.m-scene {
-  z-index: -1;
-  /** Basic styles for an animated element */
-  /** An element that fades in */
-  /** An element that fades in and slides up */
-  /** An element that fades in and slides from the right */ }
-  .m-scene .scene_element {
-    animation-duration: 0.25s;
-    transition-timing-function: ease-in;
-    animation-fill-mode: both; }
-  .m-scene .scene_element--fadein {
-    animation-name: fadeIn; }
-  .m-scene .scene_element--fadeinup {
-    animation-name: fadeInUp; }
-  .m-scene .scene_element--fadeinright {
-    animation-name: fadeInRight; }
-  .m-scene.is-exiting .scene_element {
-    animation-direction: alternate-reverse; }
-
-* {
+html {
+  height: 100%;
   box-sizing: border-box; }
 
 body {
-  background-color: #eceff1; }
-
-header {
-  z-index: 1000; }
+  position: relative;
+  background-color: #eceff1;
+  min-height: 100%;
+  padding-bottom: 6rem; }
 
 nav {
   background-color: #4db6ac; }
@@ -82,8 +38,23 @@ nav {
       width: 80%; } }
 
 footer {
-  text-align: center; }
+  text-align: center;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0; }
   footer.page-footer {
     background-color: #cfd8dc; }
+
+.app-error {
+  margin: 20px 0 30px;
+  border: 1px solid #dad7de;
+  padding: 10px;
+  background-color: #f7f5fa;
+  border-radius: 6px;
+  font-size: .69em; }
+  @media screen and (min-width: 601px) {
+    .app-error {
+      font-size: 1em; } }
 
 /*# sourceMappingURL=application.css.map */

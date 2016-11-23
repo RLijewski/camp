@@ -2,12 +2,11 @@ package com.developedbyryan.camp.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
-public class StatePark {
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,37 +16,33 @@ public class StatePark {
     @Size(min = 5, max = 30)
     private String name;
 
-    // Will want to remove validation messages from this class
-    // TODO: see https://teamtreehouse.com/library/displaying-validation-messages
-    // under teacher's notes for instructions
+    @NotNull
+    @Pattern(regexp = "#[0-9a-fA-F]{6}")
+    private String colorCode;
 
-    @OneToMany(mappedBy = "statePark")
-    private List<Photo> photos = new ArrayList<>();
-
-    public StatePark() {}
+    public Category() {}
 
     public Long getId() {
-
         return id;
     }
 
     public void setId(Long id) {
-
         this.id = id;
     }
 
     public String getName() {
-
         return name;
     }
 
     public void setName(String name) {
-
         this.name = name;
     }
 
-    public List<Photo> getPhotos() {
+    public String getColorCode() {
+        return colorCode;
+    }
 
-        return photos;
+    public void setColorCode(String colorCode) {
+        this.colorCode = colorCode;
     }
 }

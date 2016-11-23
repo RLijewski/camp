@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="layout :: head('Login')"></head>
+
+  <style>
+    #login-page {
+      background-color: #eceff1;
+    }
+
+    #login-card {
+      margin-top: 100px;
+    }
+  </style>
+
+  <body id="login-page">
+    <main class="container">
+        <div class="row">
+          <div class="col s12 m8 l6 offset-m2 offset-l3">
+            <div class="card-panel" id="login-card">
+              <div class="card-content">
+                <div th:replace="layout :: flash"></div>
+
+                <form th:action="@{/login}" id="login-form" th:object="${user}" method="post">
+                  <div>
+                    <h4 class="center-align">Login</h4>
+                    <div class="input-field">
+                      <div class="active"></div>
+                      <input id="user-name" type="text" th:field="*{username}"/>
+                      <label for="user-name">Username</label>
+                    </div>
+
+                    <div class="input-field">
+                      <div class="active"></div>
+                      <input id="password" type="password" th:field="*{password}"/>
+                      <label for="password">Password</label>
+                    </div>
+
+                    <div class="card-action right-align">
+                      <button class="btn waves-effect waves-light button" type="submit">Login</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+    </main>
+
+    <div th:replace="layout :: scripts"></div>
+  </body>
+</html>
