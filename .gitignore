@@ -4,3 +4,9 @@
 build/
 out/
 h2-server-bootup
+*.DS_Store
+data/
+taskArtifacts/
+img/
+*.sql
+*.map
