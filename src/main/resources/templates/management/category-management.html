@@ -7,7 +7,23 @@
 
     <div th:replace="layout :: flash"></div>
 
-    <main class="container">
+    <main class="container section">
+      <div class="row">
+        <div class="col s12 m6 l4" th:each="category : ${categories}">
+          <div class="card-panel hoverable" th:style="|background-color: ${category.colorCode}|">
+            <h4 class="center-align white-text" th:text="${category.name}"></h4>
+
+            <div class="category-card-action">
+              <form class="hide" id="deleteForm" th:action="@{|/category-delete/${category.id}|}" method="get"></form>
+              <a class="deleteButton"><i class="material-icons card-action-icon delete-icon card-icon">delete</i></a>
+
+              <form class="hide" id="editForm" th:action="@{|/category-edit/${category.id}|}" method="get"></form>
+              <a class="editButton"><i class="material-icons card-action-icon edit-icon card-icon">mode_edit</i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div th:replace="layout :: addButton('add-category')"></div>
     </main>
 

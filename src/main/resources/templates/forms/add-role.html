@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head(${title})"></head>
+
+<body>
+<header th:replace="layout :: header"></header>
+
+<div th:replace="layout :: flash"></div>
+
+<main class="container section">
+  <div class="row">
+    <div class="col s12">
+      <div class="card-panel">
+        <form th:action="@{${action}}" method="post" th:object="${role}" id="add-form">
+          <input type="hidden" th:field="*{id}" name="id"/>
+          <div>
+            <h4 th:text="${title}">Add A New Role</h4>
+
+            <div class="input-field">
+              <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="active"></div>
+              <input id="role-name" type="text" th:field="*{name}"/>
+              <label for="role-name">Name</label>
+            </div>
+
+            <div class="card-action right-align">
+              <a th:href="@{/role-management}" class="waves-effect waves-light btn grey">Cancel</a>
+
+              <button class="btn waves-effect waves-light button" type="submit" th:text="${submit}"></button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer th:replace="layout :: footer"></footer>
+
+<div th:replace="layout :: scripts"></div>
+</body>
+</html>

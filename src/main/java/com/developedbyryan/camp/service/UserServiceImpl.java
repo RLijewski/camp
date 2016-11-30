@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.List;
 
 @Service
@@ -17,12 +18,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Iterable<User> findAll() {
-        return null;
+
+        return userDao.findAll();
     }
 
     @Override
     public User findOne(Long id) {
-        return null;
+        return userDao.findOne(id);
     }
 
     @Override
@@ -32,12 +34,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void save(User user) {
-
+        userDao.save(user);
     }
 
     @Override
-    public void delete(User user) {
-
+    public void delete(User user, String currentUsername) throws IllegalArgumentException {
+        if (!user.getUsername().equals(currentUsername)) {
+            userDao.delete(user);
+        } else {
+            throw new IllegalArgumentException("Cannot delete the currently logged in user!");
+        }
     }
 
     @Override

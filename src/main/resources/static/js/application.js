@@ -1,18 +1,27 @@
 $( document ).ready(function() {
     $(".dropdown-button").dropdown({
-        hover: true
+        hover: false
     });
 
     $("#logoutButton").click(function(){
         $("#logoutForm").submit();
     });
 
-    // $("#logoutForm").submit(function(){
-    //     $.post("/logout", $("#logoutForm").serialize());
-    // });
-    //
-    // $("logoutButton").click(function(e) {
-    //     $("#logoutForm").submit(); // calls the submit handler
-    //     e.preventDefault();  // Prevents the default behavior of the link
-    // });
+    $("#close-flash").on("click", function () {
+        $(".flash-fragment").remove();
+    });
+
+    $("#logoutButton").on("click", function () {
+        $("#logoutForm").submit();
+    });
+
+    $(".deleteButton").on("click", function (e) {
+        $(this).prev().submit();
+    });
+
+    $(".editButton").on("click", function (e) {
+        $(this).prev().submit();
+    });
+
+    $('select').material_select();
 });

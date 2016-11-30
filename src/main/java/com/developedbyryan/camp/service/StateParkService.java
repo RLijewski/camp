@@ -11,6 +11,7 @@ public interface StateParkService {
     Iterable<StatePark> findAll();
     StatePark findOne(Long id);
     void save(StatePark statePark, MultipartFile file);
+    void save(StatePark statePark);
     void delete(StatePark statePark);
     byte[] getMainPhoto(Long id);
 }

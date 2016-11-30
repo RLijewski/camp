@@ -78,4 +78,24 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return enabled;
     }
+
+//    public void setUsername(String username) {
+//        this.username = username;
+//    }
+//
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
+
+//    public void setEnabled(boolean enabled) {
+//        this.enabled = enabled;
+//    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 }
