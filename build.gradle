@@ -46,6 +46,10 @@ dependencies {
 
 }
 
+task stage {
+    dependsOn build
+}
+
 task wrapper(type: Wrapper) {
     gradleVersion = '2.9'
 }
