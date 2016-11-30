@@ -8,5 +8,4 @@ h2-server-bootup
 data/
 taskArtifacts/
 img/
-*.sql
 *.map
