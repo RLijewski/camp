@@ -4,6 +4,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Category {
@@ -19,6 +21,9 @@ public class Category {
     @NotNull
     @Pattern(regexp = "#[0-9a-fA-F]{6}")
     private String colorCode;
+
+    @OneToMany(mappedBy = "category")
+    private List<StatePark> stateParks = new ArrayList<>();
 
     public Category() {}
 
@@ -44,5 +49,13 @@ public class Category {
 
     public void setColorCode(String colorCode) {
         this.colorCode = colorCode;
+    }
+
+    public List<StatePark> getStateParks() {
+        return stateParks;
+    }
+
+    public void setStateParks(List<StatePark> stateParks) {
+        this.stateParks = stateParks;
     }
 }

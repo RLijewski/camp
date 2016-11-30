@@ -2,6 +2,7 @@ package com.developedbyryan.camp.web.controller;
 
 import com.developedbyryan.camp.model.Photo;
 import com.developedbyryan.camp.model.StatePark;
+import com.developedbyryan.camp.service.CategoryService;
 import com.developedbyryan.camp.service.StateParkService;
 import com.developedbyryan.camp.web.FlashMessage;
 import org.hibernate.Session;
@@ -28,19 +29,25 @@ public class StateParkController {
     @Autowired
     private StateParkService stateParkService;
 
+    @Autowired
+    private CategoryService categoryService;
+
     @SuppressWarnings("unchecked")
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String listStateParks(Model model) {
+    public String showStateParks(Model model) {
         Iterable<StatePark> stateParks = stateParkService.findAll();
         model.addAttribute("stateParks", stateParks);
         return "index";
     }
 
     @RequestMapping(value = "/add-statepark", method = RequestMethod.GET)
-    public String addStatePark(Model model) {
+    public String getStateParkForm(Model model) {
         model.addAttribute("title", "New State Park");
-        model.addAttribute("submit", "Add");
+        model.addAttribute("submit", "Create");
         model.addAttribute("action", "/add-statepark");
+        model.addAttribute("hideInput", "");
+        model.addAttribute("hidePhoto", "hide");
+        model.addAttribute("categories",categoryService.findAll());
         if (!model.containsAttribute("statePark")) {
             model.addAttribute("statePark", new StatePark());
         }
@@ -57,7 +64,7 @@ public class StateParkController {
     }
 
     @RequestMapping(value = "/add-statepark", method = RequestMethod.POST)
-    public String addStatePark(@Valid StatePark statePark, @RequestParam MultipartFile file, BindingResult result, RedirectAttributes redirectAttributes) {
+    public String createStatePark(@Valid StatePark statePark, @RequestParam MultipartFile file, BindingResult result, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.statePark", result);
             redirectAttributes.addFlashAttribute("statePark", statePark);
@@ -80,5 +87,45 @@ public class StateParkController {
         final HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.IMAGE_PNG);
         return new ResponseEntity<>(imageContent, headers, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/state-park-delete/{id}", method = RequestMethod.GET)
+    public String deleteStatePark(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        StatePark statePark = stateParkService.findOne(id);
+        stateParkService.delete(statePark);
+
+        redirectAttributes.addFlashAttribute("flash", new FlashMessage("State Park Successfully Deleted!", FlashMessage.Status.SUCCESS));
+
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/state-park-update/{id}", method = RequestMethod.POST)
+    public String updateStatePark(@Valid StatePark statePark, @RequestParam Long id, BindingResult result, RedirectAttributes redirectAttributes) {
+        if (result.hasErrors()) {
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.statePark", result);
+            redirectAttributes.addFlashAttribute("statePark", statePark);
+            return String.format("redirect:/state-park-edit/%s", id);
+        }
+        stateParkService.save(statePark);
+
+        redirectAttributes.addFlashAttribute("flash", new FlashMessage("State Park Successfully Updated!", FlashMessage.Status.SUCCESS));
+
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/state-park-edit/{id}", method = RequestMethod.GET)
+    public String editStatePark(@PathVariable Long id, Model model) {
+        if (!model.containsAttribute("statePark")) {
+            model.addAttribute("statePark", stateParkService.findOne(id));
+        }
+
+        model.addAttribute("title", "Edit State Park");
+        model.addAttribute("submit", "Save");
+        model.addAttribute("action", String.format("/state-park-update/%s", id));
+        model.addAttribute("hideInput", "hide");
+        model.addAttribute("hidePhoto", "");
+        model.addAttribute("categories",categoryService.findAll());
+
+        return "forms/add-statepark";
     }
 }

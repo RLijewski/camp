@@ -7,7 +7,25 @@
 
     <div th:replace="layout :: flash"></div>
 
-    <main class="container">
+    <main class="container section">
+      <div class="row">
+        <div class="col s12 l6" th:each="photo : ${photos}">
+          <div class="card hoverable">
+            <div class="card-image">
+              <img th:src="@{|/photo/${photo.id}|}"/>
+            </div>
+
+            <div class="card-action">
+              <form class="hide" id="deleteForm" th:action="@{|/photo-delete/${photo.id}|}" method="get"></form>
+              <a class="deleteButton"><i class="material-icons card-action-icon delete-icon card-icon">delete</i></a>
+
+              <form class="hide" id="editForm" th:action="@{|/photo-edit/${photo.id}|}" method="get"></form>
+              <a class="editButton"><i class="material-icons card-action-icon edit-icon card-icon">mode_edit</i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div th:replace="layout :: addButton('add-photo')"></div>
     </main>
 

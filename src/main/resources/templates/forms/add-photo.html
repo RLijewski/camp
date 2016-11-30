@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head th:replace="layout :: head('Add-Photo')"></head>
+  <head th:replace="layout :: head(${title})"></head>
 
   <body>
     <header th:replace="layout :: header"></header>
@@ -11,10 +11,11 @@
       <div class="row">
         <div class="col s12">
           <div class="card-panel">
-            <form th:action="@{/add-photo}" method="post" th:object="${photo}" id="add-form" enctype="multipart/form-data">
+            <form th:action="@{${action}}" method="post" th:object="${photo}" id="add-form" enctype="multipart/form-data">
+              <input type="hidden" th:field="*{id}" name="id"/>
               <div>
-                <h4>Add A New Photo</h4>
-                <div class="file-field input-field">
+                <h4 th:text="${title}">Add A New Photo</h4>
+                <div class="file-field input-field" th:classappend="${hideInput}">
                   <div class="btn">
                     <span>Photo</span>
                     <input type="file" accept="image/*" name="file" class="validate"/>
@@ -23,10 +24,28 @@
                     <input class="file-path" type="text"/>
                   </div>
                 </div>
+
+                <div id="form-photo" th:classappend="${hidePhoto}">
+                  <span>Photo</span>
+                  <img th:src="@{|/photo/${photo.id}|}"/>
+                </div>
+
+                <div class="input-field">
+                  <input id="photo-description" type="text" th:field="*{description}"/>
+                  <label for="photo-description">Description</label>
+                </div>
+
+                <div class="input-field">
+                  <select th:field="*{statePark.id}">
+                    <option th:each="statePark : ${stateParks}" th:value="${statePark.id}" th:text="${statePark.name}"></option>
+                  </select>
+                  <label>Select a statePark</label>
+                </div>
+
                 <div class="card-action right-align">
                   <a th:href="@{/photo-management}" class="waves-effect waves-light btn grey">Cancel</a>
 
-                  <button class="btn waves-effect waves-light button" type="submit">Submit
+                  <button class="btn waves-effect waves-light button" type="submit" th:text="${submit}">Submit
                     <i class="material-icons right">send</i>
                   </button>
                 </div>

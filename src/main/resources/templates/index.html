@@ -17,24 +17,24 @@
         <!--</div>-->
       <!--</div>-->
 
-      <!--will be moved-->
-      <!--<div th:fragment="flash" th:if="${flash != null}" class="container">-->
-        <!--<i class="right material-icons" data-close="">close</i>-->
-        <!--<div th:classappend="${#strings.toLowerCase(flash.status)}" th:text="${flash.message}" class="flash"></div>-->
-      <!--</div>-->
-
       <div id="content">
         <div class="row">
           <div class="col s12 l6" th:each="statePark : ${stateParks}">
             <div class="card hoverable">
               <div class="card-image">
                 <img th:src="@{|/state-park/${statePark.id}|}"/>
+                <i class="material-icons card-favorite-icon card-icon">star</i>
                 <span class="card-title" th:text="${statePark.name}">Card Title</span>
               </div>
+
               <div class="card-action">
-                <i class="material-icons">mode_edit</i>
-                <i class="material-icons">delete</i>
-                <i class="material-icons">star</i>
+                <div class="chip" th:text="${statePark.category.name}" th:style="|background-color:${statePark.category.colorCode}|"></div>
+
+                <form class="hide" id="deleteForm" th:action="@{|/state-park-delete/${statePark.id}|}" method="get"></form>
+                <a class="deleteButton"><i class="material-icons card-action-icon delete-icon card-icon">delete</i></a>
+
+                <form class="hide" id="editForm" th:action="@{|/state-park-edit/${statePark.id}|}" method="get"></form>
+                <a class="editButton"><i class="material-icons card-action-icon edit-icon card-icon">mode_edit</i></a>
               </div>
             </div>
           </div>

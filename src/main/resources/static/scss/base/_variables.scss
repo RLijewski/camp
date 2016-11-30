@@ -6,12 +6,10 @@ $light-green-color  : #dcedc8;
 $dark-green-color   : #8bc34a;
 $dark-blue-grey     : #cfd8dc;
 $light-grey         : #bdbdbd;
-
-// Layout variables
-$not-searching-height : 70px;
-$searching-height     : calc(100vh - #{$not-searching-height} + 3px);
-$bottom-margin-ns     : $not-searching-height - 20px;
-$bottom-margin-s      : calc(#{$searching-height} - 50px);
+$edit-green         : #388e3c;
+$delete-red         : #d32f2f;
+$favorite-yellow    : #fdd835;
+$icon-grey          : #9e9e9e;
 
 // Font stacks
 $stack-sans-serif   : Helvetica, Arial, sans-serif;

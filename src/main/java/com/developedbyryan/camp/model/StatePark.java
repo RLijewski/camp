@@ -21,7 +21,10 @@ public class StatePark {
     // TODO: see https://teamtreehouse.com/library/displaying-validation-messages
     // under teacher's notes for instructions
 
-    @OneToMany(mappedBy = "statePark")
+    @ManyToOne
+    private Category category;
+
+    @OneToMany(mappedBy = "statePark", cascade = CascadeType.ALL)
     private List<Photo> photos = new ArrayList<>();
 
     public StatePark() {}
@@ -44,6 +47,18 @@ public class StatePark {
     public void setName(String name) {
 
         this.name = name;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public void setPhotos(List<Photo> photos) {
+        this.photos = photos;
     }
 
     public List<Photo> getPhotos() {

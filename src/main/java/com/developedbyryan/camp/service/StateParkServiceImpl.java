@@ -36,16 +36,18 @@ public class StateParkServiceImpl implements StateParkService {
     @Override
     public void save(StatePark statePark, MultipartFile file) {
         Photo newPhoto = new Photo();
-        try {
-            newPhoto.setImage(file.getBytes());
-        } catch (IOException e) {
-            System.err.println("Unable to get byte array from uploaded file.");
-        }
 
         StatePark newStatePark = stateParkDao.save(statePark);
+
         newPhoto.setStatePark(newStatePark);
         newPhoto.setMainPhoto(true);
-        photoService.save(newPhoto);
+
+        photoService.save(newPhoto, file);
+    }
+
+    @Override
+    public void save(StatePark statePark) {
+        stateParkDao.save(statePark);
     }
 
     @Override

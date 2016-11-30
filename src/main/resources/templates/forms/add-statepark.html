@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head th:replace="layout :: head('Add-Statepark')"></head>
+  <head th:replace="layout :: head(${title})"></head>
 
   <body>
     <header th:replace="layout :: header"></header>
@@ -19,7 +19,15 @@
                   <input id="state-park-name" type="text" th:field="*{name}" name="name"/>
                   <label for="state-park-name">Name</label>
                 </div>
-                <div class="file-field input-field">
+
+                <div class="input-field">
+                  <select th:field="*{category.id}">
+                    <option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.name}" th:style="|color:${cat.colorCode}|">Technology</option>
+                  </select>
+                  <label>Select a category</label>
+                </div>
+
+                <div class="file-field input-field" th:classappend="${hideInput}">
                   <div class="btn">
                     <span>Photo</span>
                     <input type="file" id="file" name="file"/>
@@ -28,6 +36,12 @@
                    <input class="file-path" type="text"/>
                   </div>
                 </div>
+
+                <div id="form-main-photo" th:classappend="${hidePhoto}">
+                  <span>Main photo</span>
+                  <img th:src="@{|/state-park/${statePark.id}|}"/>
+                </div>
+
                 <div class="card-action right-align">
                   <a th:href="@{/}" class="waves-effect waves-light btn grey">Cancel</a>
 
