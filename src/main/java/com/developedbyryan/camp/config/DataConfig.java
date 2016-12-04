@@ -13,6 +13,8 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
 import javax.servlet.MultipartConfigElement;
 import javax.sql.DataSource;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Properties;
 
 
@@ -24,7 +26,7 @@ public class DataConfig {
     private Environment env;
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws URISyntaxException {
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
 
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
@@ -37,14 +39,30 @@ public class DataConfig {
         return factory;
     }
 
+//    @Bean
+//    public DataSource dataSource() {
+//        BasicDataSource ds = new BasicDataSource();
+//        ds.setDriverClassName(env.getProperty("camp.db.driver"));
+//        ds.setUrl(env.getProperty("camp.db.url"));
+//        ds.setUsername(env.getProperty("camp.db.username"));
+//        ds.setPassword(env.getProperty("camp.db.password"));
+//        return ds;
+//    }
+
     @Bean
-    public DataSource dataSource() {
-        BasicDataSource ds = new BasicDataSource();
-        ds.setDriverClassName(env.getProperty("camp.db.driver"));
-        ds.setUrl(env.getProperty("camp.db.url"));
-        ds.setUsername(env.getProperty("camp.db.username"));
-        ds.setPassword(env.getProperty("camp.db.password"));
-        return ds;
+    public BasicDataSource dataSource() throws URISyntaxException {
+        URI dbUri = new URI(System.getenv("DATABASE_URL"));
+
+        String username = dbUri.getUserInfo().split(":")[0];
+        String password = dbUri.getUserInfo().split(":")[1];
+        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + dbUri.getPath() + ":" + dbUri.getPort() + dbUri.getPath();
+
+        BasicDataSource basicDataSource = new BasicDataSource();
+        basicDataSource.setUrl(dbUrl);
+        basicDataSource.setUsername(username);
+        basicDataSource.setPassword(password);
+
+        return basicDataSource;
     }
 
     private Properties getHibernateProperties() {
