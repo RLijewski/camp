@@ -26,7 +26,7 @@ public class DataConfig {
     private Environment env;
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws URISyntaxException {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
 
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
@@ -39,31 +39,31 @@ public class DataConfig {
         return factory;
     }
 
-//    @Bean
-//    public DataSource dataSource() {
-//        BasicDataSource ds = new BasicDataSource();
-//        ds.setDriverClassName(env.getProperty("camp.db.driver"));
-//        ds.setUrl(env.getProperty("camp.db.url"));
-//        ds.setUsername(env.getProperty("camp.db.username"));
-//        ds.setPassword(env.getProperty("camp.db.password"));
-//        return ds;
-//    }
-
     @Bean
-    public BasicDataSource dataSource() throws URISyntaxException {
-        URI dbUri = new URI(System.getenv("DATABASE_URL"));
-
-        String username = dbUri.getUserInfo().split(":")[0];
-        String password = dbUri.getUserInfo().split(":")[1];
-        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + dbUri.getPath() + ":" + dbUri.getPort() + dbUri.getPath();
-
-        BasicDataSource basicDataSource = new BasicDataSource();
-        basicDataSource.setUrl(dbUrl);
-        basicDataSource.setUsername(username);
-        basicDataSource.setPassword(password);
-
-        return basicDataSource;
+    public DataSource dataSource() {
+        BasicDataSource ds = new BasicDataSource();
+        //ds.setDriverClassName(env.getProperty("camp.db.driver"));
+        ds.setUrl(env.getProperty("camp.db.url"));
+        ds.setUsername(env.getProperty("camp.db.username"));
+        ds.setPassword(env.getProperty("camp.db.password"));
+        return ds;
     }
+
+//    @Bean
+//    public BasicDataSource dataSource() throws URISyntaxException {
+//        URI dbUri = new URI(System.getenv("DATABASE_URL"));
+//
+//        String username = dbUri.getUserInfo().split(":")[0];
+//        String password = dbUri.getUserInfo().split(":")[1];
+//        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + dbUri.getPath() + ":" + dbUri.getPort() + dbUri.getPath();
+//
+//        BasicDataSource basicDataSource = new BasicDataSource();
+//        basicDataSource.setUrl(dbUrl);
+//        basicDataSource.setUsername(username);
+//        basicDataSource.setPassword(password);
+//
+//        return basicDataSource;
+//    }
 
     private Properties getHibernateProperties() {
         Properties properties = new Properties();
