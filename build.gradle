@@ -39,8 +39,9 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '1.4.1.RELEASE'
     compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity4', version: '2.1.2.RELEASE'
     compile("org.springframework.boot:spring-boot-devtools")
+    compile group: 'org.postgresql', name: 'postgresql', version: '9.4-1206-jdbc42'
 
-    runtime group: 'com.h2database', name: 'h2', version: '1.4.191'
+//    runtime group: 'com.h2database', name: 'h2', version: '1.4.191'
     runtime group: 'javax.transaction', name: 'jta', version: '1.1'
     runtime group: 'org.aspectj', name: 'aspectjweaver', version: '1.8.7'
 
