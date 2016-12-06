@@ -39,20 +39,20 @@ public class UserController {
 
             redirectAttributes.addFlashAttribute("user", appUser);
 
-            return "redirect:/add-appUser";
+            return "redirect:/add-user";
         }
         userService.save(appUser);
 
-        redirectAttributes.addFlashAttribute("flash", new FlashMessage("AppUser Successfully Added!", FlashMessage.Status.SUCCESS));
+        redirectAttributes.addFlashAttribute("flash", new FlashMessage("User Successfully Added!", FlashMessage.Status.SUCCESS));
 
-        return "redirect:/appUser-management";
+        return "redirect:/user-management";
     }
 
     @RequestMapping(value = "/add-user", method = RequestMethod.GET)
     public String addUser(Model model) {
         Iterable<Role> roles = roleService.findAll();
         model.addAttribute("roles", roles);
-        model.addAttribute("title", "New AppUser");
+        model.addAttribute("title", "New User");
         model.addAttribute("submit", "Create");
         model.addAttribute("action", "/add-user");
         if (!model.containsAttribute("user")) {
@@ -67,8 +67,8 @@ public class UserController {
         AppUser appUser = userService.findOne(id);
         userService.delete(appUser, principal.getName());
 
-        redirectAttributes.addFlashAttribute("flash", new FlashMessage("AppUser Successfully Deleted!", FlashMessage.Status.SUCCESS));
+        redirectAttributes.addFlashAttribute("flash", new FlashMessage("User Successfully Deleted!", FlashMessage.Status.SUCCESS));
 
-        return "redirect:/appUser-management";
+        return "redirect:/user-management";
     }
 }

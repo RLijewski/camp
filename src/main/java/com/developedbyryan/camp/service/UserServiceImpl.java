@@ -39,16 +39,16 @@ public class UserServiceImpl implements UserService {
         if (!appUser.getUsername().equals(currentUsername)) {
             userDao.delete(appUser);
         } else {
-            throw new IllegalArgumentException("Cannot delete the currently logged in appUser!");
+            throw new IllegalArgumentException("Cannot delete the currently logged in User!");
         }
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // Load appUser from the database (throw exception if not found)
+        // Load user from the database (throw exception if not found)
         AppUser appUser = userDao.findByUsername(username);
         if(appUser == null) {
-            throw new UsernameNotFoundException("AppUser not found");
+            throw new UsernameNotFoundException("User not found");
         }
 
         // Return appUser object

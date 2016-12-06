@@ -47,7 +47,7 @@
               <div class="card-content">
                 <div th:replace="layout :: flash"></div>
 
-                <form th:action="@{/login}" id="login-form" th:object="${appUser}" method="post">
+                <form th:action="@{/login}" id="login-form" th:object="${user}" method="post">
                   <div>
                     <h4 class="center-align">Login</h4>
                     <div class="input-field">

@@ -27,14 +27,14 @@
             </div>
 
             <div class="appUser-card-action">
-              <form class="hide" id="deleteForm" th:action="@{|/appUser-delete/${appUser.id}|}" method="get"></form>
+              <form class="hide" id="deleteForm" th:action="@{|/user-delete/${appUser.id}|}" method="get"></form>
               <a class="deleteButton"><i class="material-icons card-action-icon delete-icon card-icon">delete</i></a>
             </div>
           </div>
         </div>
       </div>
 
-      <!--<div th:replace="layout :: addButton('add-appUser')"></div>-->
+      <!--<div th:replace="layout :: addButton('add-user')"></div>-->
     </main>
 
     <footer th:replace="layout :: footer"></footer>
