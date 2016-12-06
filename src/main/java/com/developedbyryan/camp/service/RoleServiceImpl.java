@@ -2,8 +2,8 @@ package com.developedbyryan.camp.service;
 
 
 import com.developedbyryan.camp.dao.RoleDao;
+import com.developedbyryan.camp.model.AppUser;
 import com.developedbyryan.camp.model.Role;
-import com.developedbyryan.camp.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,8 +32,8 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public void delete(Role role, String currentUsername) throws IllegalArgumentException {
-        User currentUser = userService.findByUsername(currentUsername);
-        Role currentUserRole = currentUser.getRole();
+        AppUser currentAppUser = userService.findByUsername(currentUsername);
+        Role currentUserRole = currentAppUser.getRole();
 
         if (!currentUserRole.getName().equals(role.getName())) {
             roleDao.delete(role);

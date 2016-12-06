@@ -1,7 +1,7 @@
 package com.developedbyryan.camp.web.controller;
 
 
-import com.developedbyryan.camp.model.User;
+import com.developedbyryan.camp.model.AppUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +14,7 @@ public class LoginController {
 
     @RequestMapping(path = "/login", method = RequestMethod.GET)
     public String loginForm(Model model, HttpServletRequest request) {
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new AppUser());
         try {
             Object flash = request.getSession().getAttribute("flash");
             model.addAttribute("flash", flash);

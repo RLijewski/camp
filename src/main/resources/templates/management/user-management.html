@@ -9,32 +9,32 @@
 
     <main class="container section">
       <div class="row">
-        <div class="col s12" th:each="user : ${users}">
+        <div class="col s12" th:each="appUser : ${users}">
           <div class="card-panel">
             <div>
               <span>Username: </span>
-              <span th:text="${user.username}">username</span>
+              <span th:text="${appUser.username}">username</span>
             </div>
 
             <div>
               <span>Role: </span>
-              <span th:text="${user.role.name}">role</span>
+              <span th:text="${appUser.role.name}">role</span>
             </div>
 
             <div>
               <span>Enabled: </span>
-              <span th:text="${user.enabled}">enabled</span>
+              <span th:text="${appUser.enabled}">enabled</span>
             </div>
 
-            <div class="user-card-action">
-              <form class="hide" id="deleteForm" th:action="@{|/user-delete/${user.id}|}" method="get"></form>
+            <div class="appUser-card-action">
+              <form class="hide" id="deleteForm" th:action="@{|/appUser-delete/${appUser.id}|}" method="get"></form>
               <a class="deleteButton"><i class="material-icons card-action-icon delete-icon card-icon">delete</i></a>
             </div>
           </div>
         </div>
       </div>
 
-      <!--<div th:replace="layout :: addButton('add-user')"></div>-->
+      <!--<div th:replace="layout :: addButton('add-appUser')"></div>-->
     </main>
 
     <footer th:replace="layout :: footer"></footer>

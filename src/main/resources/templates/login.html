@@ -47,13 +47,13 @@
               <div class="card-content">
                 <div th:replace="layout :: flash"></div>
 
-                <form th:action="@{/login}" id="login-form" th:object="${user}" method="post">
+                <form th:action="@{/login}" id="login-form" th:object="${appUser}" method="post">
                   <div>
                     <h4 class="center-align">Login</h4>
                     <div class="input-field">
                       <div class="active"></div>
-                      <input id="user-name" type="text" th:field="*{username}"/>
-                      <label for="user-name">Username</label>
+                      <input id="appUser-name" type="text" th:field="*{username}"/>
+                      <label for="appUser-name">Username</label>
                     </div>
 
                     <div class="input-field">

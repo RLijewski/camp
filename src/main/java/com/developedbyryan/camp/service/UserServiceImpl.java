@@ -2,14 +2,11 @@ package com.developedbyryan.camp.service;
 
 
 import com.developedbyryan.camp.dao.UserDao;
-import com.developedbyryan.camp.model.User;
+import com.developedbyryan.camp.model.AppUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.security.Principal;
-import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -17,44 +14,44 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public Iterable<User> findAll() {
+    public Iterable<AppUser> findAll() {
 
         return userDao.findAll();
     }
 
     @Override
-    public User findOne(Long id) {
+    public AppUser findOne(Long id) {
         return userDao.findOne(id);
     }
 
     @Override
-    public User findByUsername(String username) {
+    public AppUser findByUsername(String username) {
         return userDao.findByUsername(username);
     }
 
     @Override
-    public void save(User user) {
-        userDao.save(user);
+    public void save(AppUser appUser) {
+        userDao.save(appUser);
     }
 
     @Override
-    public void delete(User user, String currentUsername) throws IllegalArgumentException {
-        if (!user.getUsername().equals(currentUsername)) {
-            userDao.delete(user);
+    public void delete(AppUser appUser, String currentUsername) throws IllegalArgumentException {
+        if (!appUser.getUsername().equals(currentUsername)) {
+            userDao.delete(appUser);
         } else {
-            throw new IllegalArgumentException("Cannot delete the currently logged in user!");
+            throw new IllegalArgumentException("Cannot delete the currently logged in appUser!");
         }
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // Load user from the database (throw exception if not found)
-        User user = userDao.findByUsername(username);
-        if(user == null) {
-            throw new UsernameNotFoundException("User not found");
+        // Load appUser from the database (throw exception if not found)
+        AppUser appUser = userDao.findByUsername(username);
+        if(appUser == null) {
+            throw new UsernameNotFoundException("AppUser not found");
         }
 
-        // Return user object
-        return user;
+        // Return appUser object
+        return appUser;
     }
 }

@@ -1,7 +1,7 @@
 package com.developedbyryan.camp.web.controller;
 
+import com.developedbyryan.camp.model.AppUser;
 import com.developedbyryan.camp.model.Role;
-import com.developedbyryan.camp.model.User;
 import com.developedbyryan.camp.service.RoleService;
 import com.developedbyryan.camp.service.UserService;
 import com.developedbyryan.camp.web.FlashMessage;
@@ -16,7 +16,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.List;
 
 @Controller
 public class UserController {
@@ -28,36 +27,36 @@ public class UserController {
 
     @RequestMapping(value = "/user-management", method = RequestMethod.GET)
     public String listUsers(Model model) {
-        Iterable<User> users = userService.findAll();
+        Iterable<AppUser> users = userService.findAll();
         model.addAttribute("users", users);
         return "management/user-management";
     }
 
     @RequestMapping(value = "/add-user", method = RequestMethod.POST)
-    public String addUser(@Valid User user, BindingResult result, RedirectAttributes redirectAttributes) {
+    public String addUser(@Valid AppUser appUser, BindingResult result, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.user", result);
 
-            redirectAttributes.addFlashAttribute("user", user);
+            redirectAttributes.addFlashAttribute("user", appUser);
 
-            return "redirect:/add-user";
+            return "redirect:/add-appUser";
         }
-        userService.save(user);
+        userService.save(appUser);
 
-        redirectAttributes.addFlashAttribute("flash", new FlashMessage("User Successfully Added!", FlashMessage.Status.SUCCESS));
+        redirectAttributes.addFlashAttribute("flash", new FlashMessage("AppUser Successfully Added!", FlashMessage.Status.SUCCESS));
 
-        return "redirect:/user-management";
+        return "redirect:/appUser-management";
     }
 
     @RequestMapping(value = "/add-user", method = RequestMethod.GET)
     public String addUser(Model model) {
         Iterable<Role> roles = roleService.findAll();
         model.addAttribute("roles", roles);
-        model.addAttribute("title", "New User");
+        model.addAttribute("title", "New AppUser");
         model.addAttribute("submit", "Create");
         model.addAttribute("action", "/add-user");
         if (!model.containsAttribute("user")) {
-            model.addAttribute("user", new User());
+            model.addAttribute("user", new AppUser());
         }
 
         return "forms/add-user";
@@ -65,11 +64,11 @@ public class UserController {
 
     @RequestMapping(value = "/user-delete/{id}", method = RequestMethod.GET)
     public String deleteUser(@PathVariable Long id, RedirectAttributes redirectAttributes, Principal principal) {
-        User user = userService.findOne(id);
-        userService.delete(user, principal.getName());
+        AppUser appUser = userService.findOne(id);
+        userService.delete(appUser, principal.getName());
 
-        redirectAttributes.addFlashAttribute("flash", new FlashMessage("User Successfully Deleted!", FlashMessage.Status.SUCCESS));
+        redirectAttributes.addFlashAttribute("flash", new FlashMessage("AppUser Successfully Deleted!", FlashMessage.Status.SUCCESS));
 
-        return "redirect:/user-management";
+        return "redirect:/appUser-management";
     }
 }

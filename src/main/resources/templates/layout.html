@@ -19,13 +19,13 @@
   <header th:fragment="header">
     <div class="navbar-fixed">
       <ul id="management" class="dropdown-content">
-        <li><a th:href="@{/user-management}">User Management</a></li>
+        <li><a th:href="@{/appUser-management}">User Management</a></li>
         <li><a th:href="@{/role-management}">Role Management</a></li>
         <li><a th:href="@{/category-management}">Category Management</a></li>
         <li><a th:href="@{/photo-management}">Photo Management</a></li>
       </ul>
-      <ul id="user-account" class="dropdown-content">
-        <!--<li><a th:href="@{/user-account}">Account</a></li>-->
+      <ul id="appUser-account" class="dropdown-content">
+        <!--<li><a th:href="@{/appUser-account}">Account</a></li>-->
         <li>
           <form class="hide" id="logoutForm" th:action="@{/logout}" method="post"></form>
           <a id="logoutButton">Log Out</a>
@@ -45,7 +45,7 @@
           </a>
           <ul class="right hide-on-med-and-down">
             <li>
-              <a sec:authentication="name" class="dropdown-button" href="#!" data-activates="user-account">
+              <a sec:authentication="name" class="dropdown-button" href="#!" data-activates="appUser-account">
                 Components
                 <i class="material-icons right">arrow_drop_down</i>
               </a>
