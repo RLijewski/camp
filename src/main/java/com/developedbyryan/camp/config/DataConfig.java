@@ -42,7 +42,7 @@ public class DataConfig {
     @Bean
     public DataSource dataSource() {
         BasicDataSource ds = new BasicDataSource();
-        //ds.setDriverClassName(env.getProperty("camp.db.driver"));
+        ds.setDriverClassName(env.getProperty("camp.db.driver"));
         ds.setUrl(env.getProperty("camp.db.url"));
         ds.setUsername(env.getProperty("camp.db.username"));
         ds.setPassword(env.getProperty("camp.db.password"));
