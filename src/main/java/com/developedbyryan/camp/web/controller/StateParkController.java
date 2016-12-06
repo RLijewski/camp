@@ -55,13 +55,13 @@ public class StateParkController {
         return "forms/add-statepark";
     }
 
-    @RequestMapping("/state-park/{stateParkId}")
-    public String stateParkDetails(@PathVariable Long stateParkId, Model model) {
-        StatePark statePark = stateParkService.findOne(stateParkId);
-        model.addAttribute("statePark", statePark);
-
-        return "state-park-details";
-    }
+//    @RequestMapping("/state-park/{stateParkId}")
+//    public String stateParkDetails(@PathVariable Long stateParkId, Model model) {
+//        StatePark statePark = stateParkService.findOne(stateParkId);
+//        model.addAttribute("statePark", statePark);
+//
+//        return "state-park-details";
+//    }
 
     @RequestMapping(value = "/add-statepark", method = RequestMethod.POST)
     public String createStatePark(@Valid StatePark statePark, @RequestParam MultipartFile file, BindingResult result, RedirectAttributes redirectAttributes) {
