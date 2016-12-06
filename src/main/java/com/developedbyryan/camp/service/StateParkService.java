@@ -13,5 +13,5 @@ public interface StateParkService {
     void save(StatePark statePark, MultipartFile file);
     void save(StatePark statePark);
     void delete(StatePark statePark);
-    byte[] getMainPhoto(Long id);
+    Photo getMainPhoto(Long id);
 }

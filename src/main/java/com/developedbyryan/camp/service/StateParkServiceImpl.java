@@ -57,13 +57,13 @@ public class StateParkServiceImpl implements StateParkService {
     }
 
     @Override
-    public byte[] getMainPhoto(Long id) {
+    public Photo getMainPhoto(Long id) {
         StatePark statePark = stateParkDao.findOne(id);
         List<Photo> allPhotos = statePark.getPhotos();
 
         for (Photo photo : allPhotos) {
             if (photo.isMainPhoto()) {
-                return photo.getImage();
+                return photo;
             }
         }
 

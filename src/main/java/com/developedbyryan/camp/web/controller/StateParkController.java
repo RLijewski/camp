@@ -79,12 +79,13 @@ public class StateParkController {
 
     @RequestMapping(value = "/state-park/{id}", produces = MediaType.IMAGE_PNG_VALUE)
     public ResponseEntity<byte[]> getMainPhoto(@PathVariable Long id) throws Exception {
-        byte[] imageContent = stateParkService.getMainPhoto(id);
+        Photo mainPhoto = stateParkService.getMainPhoto(id);
+        byte[] imageContent = mainPhoto.getImage();
         if (imageContent == null) {
             throw  new Exception("No main photo found");
         }
 
-        HttpHeaders headers = new HttpHeaders();
+        final HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.IMAGE_PNG);
         return new ResponseEntity<>(imageContent, headers, HttpStatus.OK);
     }
