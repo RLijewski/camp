@@ -76,7 +76,7 @@ public class PhotoController {
     public ResponseEntity<byte[]> getPhoto(@PathVariable Long id) throws Exception {
         byte[] imageContent = photoService.findOne(id).getImage();
         if (imageContent == null) {
-            throw  new Exception("No photo found");
+            throw new Exception("No photo found");
         }
 
         final HttpHeaders headers = new HttpHeaders();
